@@ -146,22 +146,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case CTRL_WDSA:
 	if (record->event.pressed) {
-	    tap_code(KC_ENTER);
-            wait_ms(100);
-            SEND_STRING("hello world");
-            wait_ms(100);
-            tap_code(KC_ENTER);
+            register_code(KC_LCTL);
+	    wait_ms(100);
+	    tap_code_delay(KC_W, 150);
+	    tap_code_delay(KC_D, 150);
+	    tap_code_delay(KC_S, 150);
+	    tap_code_delay(KC_S, 150);
+	    tap_code_delay(KC_S, 150);
+	    wait_ms(100);
+	    unregister_code(KC_LCTL);
         }
         return false; 
     case KG_BOMB:
         if (record->event.pressed) {
             register_code(KC_LCTL);
 	    wait_ms(100);
-	    tap_code_delay(KC_W, 100);
-	    tap_code_delay(KC_D, 100);
-	    tap_code_delay(KC_S, 100);
-	    tap_code_delay(KC_S, 100);
-	    tap_code_delay(KC_S, 100);
+	    tap_code_delay(KC_W, 200);
+	    tap_code_delay(KC_D, 200);
+	    tap_code_delay(KC_S, 200);
+	    tap_code_delay(KC_S, 200);
+	    tap_code_delay(KC_S, 200);
 	    wait_ms(100);
 	    unregister_code(KC_LCTL);
     }

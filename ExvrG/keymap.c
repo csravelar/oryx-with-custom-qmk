@@ -6,7 +6,7 @@
 
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
-  CTRL_WDSA = SAFE_RANGE,
+  CTRL_WDSA,
   HSV_0_255_255,
   HSV_86_255_128,
   HSV_172_255_255,

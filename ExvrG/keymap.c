@@ -6,6 +6,10 @@
 
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
+  HSV_0_255_255,
+  HSV_86_255_128,
+  HSV_172_255_255,
+  ST_MACRO_0,
   MACRO_Q,
   MACRO_W,
   MACRO_E,
@@ -39,15 +43,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RGB_VAD,        RGB_VAI,        TOGGLE_LAYER_COLOR,                RGB_SLD,        RGB_HUD,        RGB_HUI
   ),
   [2] = LAYOUT_moonlander(
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, MACRO_Q, MACRO_W, MACRO_E, MACRO_R, MACRO_T, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, MACRO_Q,        MACRO_W,        MACRO_E,        MACRO_R,        MACRO_T,        KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_A,           KC_S,           KC_D,           KC_F,           KC_G,           KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_H,           KC_J,           KC_K,           KC_L,           KC_SCLN,        KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
 };
+
 const uint16_t PROGMEM combo0[] = { KC_F1, KC_F2, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
@@ -103,64 +109,109 @@ bool rgb_matrix_indicators_user(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (!process_achordion(keycode, record)) { return false; }
   switch (keycode) {
-        case MACRO_Q:
-            if (record->event.pressed) {
-                register_code(KC_LCTL);  // Hold Left Control
-                tap_code(KC_W);
-                tap_code(KC_D);
-                tap_code(KC_S);
-                tap_code(KC_S);
-                tap_code(KC_S);
-                unregister_code(KC_LCTL);  // Release Left Control
-            }
-            break;
-        case MACRO_W:
-            if (record->event.pressed) {
-                register_code(KC_LCTL);
-                tap_code(KC_W);
-                tap_code(KC_D);
-                tap_code(KC_S);
-                tap_code(KC_S);
-                tap_code(KC_D);
-                unregister_code(KC_LCTL);
-            }
-            break;
-        case MACRO_E:
-            if (record->event.pressed) {
-                register_code(KC_LCTL);
-                tap_code(KC_W);
-                tap_code(KC_D);
-                tap_code(KC_S);
-                tap_code(KC_W);
-                unregister_code(KC_LCTL);
-            }
-            break;
-        case MACRO_R:
-            if (record->event.pressed) {
-                register_code(KC_LCTL);
-                tap_code(KC_D);
-                tap_code(KC_D);
-                tap_code(KC_S);
-                tap_code(KC_A);
-                tap_code(KC_D);
-                tap_code(KC_W);
-                unregister_code(KC_LCTL);
-            }
-            break;
-        case MACRO_T:
-            if (record->event.pressed) {
-                register_code(KC_LCTL);
-                tap_code(KC_S);
-                tap_code(KC_W);
-                tap_code(KC_D);
-                tap_code(KC_A);
-                unregister_code(KC_LCTL);
-            }
-            break;
-    }
+    case ST_MACRO_0:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_DOWN) SS_DELAY(100) SS_TAP(X_LEFT) SS_DELAY(100) SS_TAP(X_LEFT) SS_DELAY(100) SS_TAP(X_DOWN));
+      }
+      break;
+
+    case RGB_SLD:
+        if (rawhid_state.rgb_control) {
+            return false;
+        }
+        if (record->event.pressed) {
+            rgblight_mode(1);
+        }
+        return false;
+    case HSV_0_255_255:
+        if (rawhid_state.rgb_control) {
+            return false;
+        }
+        if (record->event.pressed) {
+            rgblight_mode(1);
+            rgblight_sethsv(0,255,255);
+        }
+        return false;
+    case HSV_86_255_128:
+        if (rawhid_state.rgb_control) {
+            return false;
+        }
+        if (record->event.pressed) {
+            rgblight_mode(1);
+            rgblight_sethsv(86,255,128);
+        }
+        return false;
+    case HSV_172_255_255:
+        if (rawhid_state.rgb_control) {
+            return false;
+        }
+        if (record->event.pressed) {
+            rgblight_mode(1);
+            rgblight_sethsv(172,255,255);
+        }
+        return false;
+
+    case MACRO_Q:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        tap_code(KC_W);
+        tap_code(KC_D);
+        tap_code(KC_S);
+        tap_code(KC_S);
+        tap_code(KC_S);
+        unregister_code(KC_LCTL);
+      }
+      break;
+
+    case MACRO_W:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        tap_code(KC_W);
+        tap_code(KC_D);
+        tap_code(KC_S);
+        tap_code(KC_S);
+        tap_code(KC_D);
+        unregister_code(KC_LCTL);
+      }
+      break;
+
+    case MACRO_E:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        tap_code(KC_W);
+        tap_code(KC_D);
+        tap_code(KC_S);
+        tap_code(KC_W);
+        unregister_code(KC_LCTL);
+      }
+      break;
+
+    case MACRO_R:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        tap_code(KC_D);
+        tap_code(KC_D);
+        tap_code(KC_S);
+        tap_code(KC_A);
+        tap_code(KC_D);
+        tap_code(KC_W);
+        unregister_code(KC_LCTL);
+      }
+      break;
+
+    case MACRO_T:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        tap_code(KC_S);
+        tap_code(KC_W);
+        tap_code(KC_D);
+        tap_code(KC_A);
+        unregister_code(KC_LCTL);
+      }
+      break;
+  }
   return true;
 }
-
 
 typedef struct {
     bool is_press_action;

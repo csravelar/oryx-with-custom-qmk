@@ -27,19 +27,20 @@ enum tap_dance_codes {
 };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
-    KC_GRAVE,       KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           TO(2),                                          TO(1),          KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_MINUS,       
-    KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           TD(DANCE_0),                                    KC_EQUAL,       KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_BSLS,        
-    KC_CAPS,        KC_A,           KC_S,           KC_D,           KC_F,           KC_G,           KC_ESCAPE,                                                                      KC_COLN,        KC_H,           KC_J,           KC_K,           KC_L,           KC_SCLN,        KC_QUOTE,       
-    KC_LEFT_SHIFT,  KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_RIGHT_SHIFT, 
-    KC_LEFT_CTRL,   KC_LEFT_ALT,    KC_AUDIO_MUTE,  KC_LEFT,        KC_RIGHT,       KC_LEFT_SHIFT,                                                                                                  KC_RIGHT_CTRL,  KC_UP,          KC_DOWN,        KC_LBRC,        KC_RBRC,        KC_RIGHT_CTRL,  
+    KC_GRAVE,       KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           TO(2),                                          TO(1),          KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_MINUS,
+    KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           TD(DANCE_0),                                    KC_EQUAL,       KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_BSLS,
+    KC_CAPS,        KC_A,           KC_S,           KC_D,           KC_F,           KC_G,           KC_ESCAPE,                                                                      KC_COLN,        KC_H,           KC_J,           KC_K,           KC_L,           KC_SCLN,        KC_QUOTE,
+    KC_LEFT_SHIFT,  KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_RIGHT_SHIFT,
+    KC_LEFT_CTRL,   KC_LEFT_ALT,    KC_AUDIO_MUTE,  KC_LEFT,        KC_RIGHT,       KC_LEFT_SHIFT,                                                                                                  KC_RIGHT_CTRL,  KC_UP,          KC_DOWN,        KC_LBRC,        KC_RBRC,        KC_RIGHT_CTRL,
     KC_SPACE,       KC_BSPC,        KC_LEFT_GUI,                    KC_ESCAPE,      KC_TAB,         KC_ENTER
   ),
   [1] = LAYOUT_moonlander(
-    KC_ESCAPE,      KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          TO(0),                                          KC_TRANSPARENT, KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         
-    KC_DELETE,      KC_EXLM,        KC_AT,          KC_LCBR,        KC_TRANSPARENT, KC_PIPE,        LALT(LCTL(KC_DELETE)),                                TD(DANCE_1),    KC_UP,          KC_7,           KC_8,           KC_9,           KC_ASTR,        KC_F12,         
-    KC_TRANSPARENT, KC_HASH,        KC_DLR,         KC_LPRN,        KC_RPRN,        KC_GRAVE,       LALT(KC_F4),                                                                    KC_TRANSPARENT, KC_DOWN,        KC_4,           KC_5,           KC_6,           KC_KP_PLUS,     KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_PERC,        KC_CIRC,        KC_LBRC,        KC_RBRC,        KC_TILD,                                        KC_AMPR,        KC_1,           KC_2,           KC_3,           KC_BSLS,        KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_COMMA,       HSV_0_255_255,  HSV_86_255_128, HSV_172_255_255,RGB_MODE_FORWARD,                                                                                                RGB_TOG,        KC_TRANSPARENT, KC_DOT,         KC_0,           KC_EQUAL,       KC_TRANSPARENT, 
+    KC_ESCAPE,      KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          TO(0),                                          KC_TRANSPARENT, KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,
+    KC_DELETE,      KC_EXLM,        KC_AT,          KC_LCBR,        KC_TRANSPARENT, KC_PIPE,        LALT(LCTL(KC_DELETE)),                                TD(DANCE_1),    KC_UP,          KC_7,           KC_8,           KC_9,           KC_ASTR,        KC_F12,
+    KC_TRANSPARENT, KC_HASH,        KC_DLR,         KC_LPRN,        KC_RPRN,        KC_GRAVE,       LALT(KC_F4),                                                                    KC_TRANSPARENT, KC_DOWN,        KC_4,           KC_5,           KC_6,           KC_KP_PLUS,     KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_PERC,        KC_CIRC,        KC_LBRC,        KC_RBRC,        KC_TILD,                                        KC_AMPR,        KC_1,           KC_2,           KC_3,           KC_BSLS,        KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_COMMA,       HSV_0_255_255,  HSV_86_255_128, HSV_172_255_255,RGB_MODE_FORWARD,
+                            RGB_TOG,        KC_TRANSPARENT, KC_DOT,         KC_0,           KC_EQUAL,       KC_TRANSPARENT,
     RGB_VAD,        RGB_VAI,        TOGGLE_LAYER_COLOR,                RGB_SLD,        RGB_HUD,        RGB_HUI
   ),
   [2] = LAYOUT_moonlander(
@@ -84,7 +85,7 @@ void set_layer_color(int layer) {
     } else {
         RGB rgb = hsv_to_rgb( hsv );
         float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
-        rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );   
+        rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );
     }
   }
 }
@@ -154,59 +155,54 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MACRO_Q:
       if (record->event.pressed) {
         register_code(KC_LCTL);
-        tap_code(KC_W);
-        tap_code(KC_D);
-        tap_code(KC_S);
-        tap_code(KC_S);
-        tap_code(KC_S);
-        unregister_code(KC_LCTL);
+        tap_code_delay(KC_W, 250);
+        tap_code_delay(KC_D, 250);
+        tap_code_delay(KC_S, 250);
+        tap_code_delay(KC_S, 250);
+        tap_code_delay(KC_S, 250);
       }
       break;
 
     case MACRO_W:
       if (record->event.pressed) {
         register_code(KC_LCTL);
-        tap_code(KC_W);
-        tap_code(KC_D);
-        tap_code(KC_S);
-        tap_code(KC_S);
-        tap_code(KC_D);
-        unregister_code(KC_LCTL);
+        tap_code_delay(KC_W, 250);
+        tap_code_delay(KC_D, 250);
+        tap_code_delay(KC_S, 250);
+        tap_code_delay(KC_S, 250);
+        tap_code_delay(KC_D, 250);
       }
       break;
 
     case MACRO_E:
       if (record->event.pressed) {
         register_code(KC_LCTL);
-        tap_code(KC_W);
-        tap_code(KC_D);
-        tap_code(KC_S);
-        tap_code(KC_W);
-        unregister_code(KC_LCTL);
+        tap_code_delay(KC_W, 250);
+        tap_code_delay(KC_D, 250);
+        tap_code_delay(KC_S, 250);
+        tap_code_delay(KC_W, 250);
       }
       break;
 
     case MACRO_R:
       if (record->event.pressed) {
         register_code(KC_LCTL);
-        tap_code(KC_D);
-        tap_code(KC_D);
-        tap_code(KC_S);
-        tap_code(KC_A);
-        tap_code(KC_D);
-        tap_code(KC_W);
-        unregister_code(KC_LCTL);
+        tap_code_delay(KC_D, 250);
+        tap_code_delay(KC_D, 250);
+        tap_code_delay(KC_S, 250);
+        tap_code_delay(KC_A, 250);
+        tap_code_delay(KC_D, 250);
+        tap_code_delay(KC_W, 250);
       }
       break;
 
     case MACRO_T:
       if (record->event.pressed) {
         register_code(KC_LCTL);
-        tap_code(KC_S);
-        tap_code(KC_W);
-        tap_code(KC_D);
-        tap_code(KC_A);
-        unregister_code(KC_LCTL);
+        tap_code_delay(KC_S, 250);
+        tap_code_delay(KC_W, 250);
+        tap_code_delay(KC_D, 250);
+        tap_code_delay(KC_A, 250);
       }
       break;
   }

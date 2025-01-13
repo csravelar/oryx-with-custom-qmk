@@ -147,37 +147,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case CTRL_WDSA:
 	if (record->event.pressed) {
             register_code(KC_LCTL);
+	    wait_ms(120);
+	    tap_code_delay(KC_W, 80);
+	    tap_code_delay(KC_D, 122);
+	    tap_code_delay(KC_S, 93);
+	    tap_code_delay(KC_S, 149);
+	    tap_code_delay(KC_S, 188);
 	    wait_ms(100);
-	    tap_code(KC_W);
-	    wait_ms(70);
-	    tap_code(KC_D);
-	    wait_ms(88);
-	    tap_code(KC_S);
-	    wait_ms(123);
-	    tap_code(KC_S);
-	    wait_ms(92);
-	    tap_code(KC_S);
-	    wait_ms(109);
-	    tap_code(KC_S);
-	    wait_ms(150);
 	    unregister_code(KC_LCTL);
         }
         return false; 
     case KG_BOMB:
         if (record->event.pressed) {
             register_code(KC_LCTL);
-	    wait_ms(100);
-	    tap_code16(KC_W);
-	    wait_ms(70);
-	    tap_code16(KC_D);
-	    wait_ms(88);
-	    tap_code16(KC_S);
-	    wait_ms(123);
-	    tap_code16(KC_S);
-	    wait_ms(92);
-	    tap_code16(KC_S);
-	    wait_ms(109);
-	    tap_code16(KC_S);
+	    wait_ms(120);
+	    tap_code_delay(KC_W, 80);
+	    tap_code_delay(KC_D, 122);
+	    tap_code_delay(KC_S, 93);
+	    tap_code_delay(KC_S, 149);
+	    tap_code_delay(KC_S, 188);
 	    wait_ms(150);
 	    unregister_code(KC_LCTL);
     }

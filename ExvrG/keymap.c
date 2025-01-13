@@ -160,7 +160,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	    tap_code_delay(KC_W, 100);
 	    tap_code_delay(KC_D, 100);
 	    tap_code_delay(KC_S, 100);
-	    tap_code_delay(KC_A, 100);
+	    tap_code_delay(KC_S, 100);
+	    tap_code_delay(KC_S, 100);
 	    wait_ms(100);
 	    unregister_code(KC_LCTL);
     }
